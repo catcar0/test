@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        text-align: center;
+        width: 800px;
+        border-collapse: collapse;
+      }
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    姓名： <input type="text" name="" id="username" value=""/> email:<input
+      type="email"
+      name=""
+      id="email"
+      value=""
+    />
+    电话： <input type="tel" name="" id="tel" value=""/>
+    <input type="button" value="添加" id="addBtn" />
+    <br />
+    <br />
+    <table id="userTable">
+      <tr>
+        <td>姓名</td>
+        <td>邮箱</td>
+        <td>电话</td>
+        <td>操作</td>
+      </tr>
+    </table>
+    
+  </body>
+</html>
+<script>
+  window.onload=function(){
+   
+
+  let students = [
+    { stuname: "张三", email: "123@wq.com", phone: "123" },
+    { stuname: "李四", email: "456@wq.com", phone: "777" },
+  ];
+  let tableObj=document.getElementById("userTable");
+  let usernameObj=document.getElementById("username");
+  let telObj=document.getElementById("tel");
+  let emailObj=document.getElementById("email");
+  let addBtnObj=document.getElementById("addBtn");
+  let j=2
+  
+  for (i = 0; i < students.length; i++){
+    var   tR=document.createElement('tr')
+  var  str="<td>"+students[i].stuname+"<td>"+students[i].email+"<td>"+students[i].phone+"<td>"+"<button  onclick='deltr(this)'>删除</button>"
+    tR.innerHTML=str
+    tableObj.appendChild(tR)
+  }
+      addBtnObj.onclick=function(){
+         //var   tR=document.createElement('tr')   
+          //var  str="<td>"+usernameObj.value+"<td>"+emailObj.value+"<td>"+telObj.value+"<td>"+"<button>删除</button>"
+          //tR.innerHTML=str
+                //tableObj.appendChild(tR)
+                
+                for (i=j-1 ; i < students.length;i++ ){
+                   if(usernameObj.value=="" ||emailObj.value=="" || telObj.value==""){
+                    alert("请输入完整数据");
+                    
+                    return
+                  } else if (students[0].stuname==usernameObj.value ||students[0].email==emailObj.value|| students[0].phone==telObj.value){
+                    alert("数据重复");
+                    
+                    return
+                  } else if (students[i].stuname==usernameObj.value ||students[i].email==emailObj.value|| students[i].phone==telObj.value){
+                    alert("数据重复");
+                    
+                    return
+                  }
+                  else{
+                   
+                    students.push({ stuname: usernameObj.value, email: emailObj.value, phone: telObj.value } )
+                    
+                    for (j ; j < students.length;){
+                        var   tR=document.createElement('tr')
+                        var  str="<td>"+students[j].stuname+"<td>"+students[j].email+"<td>"+students[j].phone+"<td>"+"<button  onclick='deltr(this)'>删除</button>"
+                        tR.innerHTML=str
+                        tableObj.appendChild(tR)
+                        j++ 
+                        return
+                        
+                  }
+  
+                // addrow = tableObj.insertRow();
+                // col1 = addrow.insertCell();
+				        // col2 = addrow.insertCell();
+                // col3 = addrow.insertCell();
+                // col4 = addrow.insertCell();
+				        // col1.innerHTML = usernameObj.value;
+				        // col2.innerHTML = emailObj.value;
+                // col3.innerHTML = telObj.value;
+                // col4.innerHTML= "<button  onclick='deltr(this)'>删除</button>";
+                  }
+              }
+             
+                
+	}
+  
+                
+      }        
+      function deltr(obj) {
+            let tr = obj.parentNode.parentNode;
+            tr.parentNode.removeChild(tr);
+        }     
+          
+               
+  
+</script>
+
